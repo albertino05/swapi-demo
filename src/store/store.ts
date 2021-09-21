@@ -11,6 +11,9 @@ export const makeStore = (): Store<ApiState> =>
   new Vuex.Store<ApiState>({
     state: {
       version: 1,
+      sections: {},
+      resources: [],
+      resource: {},
     },
     actions,
     mutations,

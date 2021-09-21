@@ -1,6 +1,27 @@
+import { ApiSections, ApiResource } from "@/entity";
+import { MutationTree, Store } from "vuex";
 import { ApiState } from "../store.types";
-import { MutationTree } from "vuex";
 
-export type ApiMutations = MutationTree<ApiState>;
+export interface ApiMutations extends MutationTree<ApiState> {
+  fetchSections(
+    this: Store<ApiState>,
+    state: ApiState,
+    payload: ApiSections
+  ): void;
+  fetchResources(
+    this: Store<ApiState>,
+    state: ApiState,
+    payload: ApiResource[]
+  ): void;
+  fetchResource(
+    this: Store<ApiState>,
+    state: ApiState,
+    payload: ApiResource
+  ): void;
+}
 
-export type ApiMutationsMock = ApiMutations;
+export interface ApiMutationsMock extends ApiMutations {
+  fetchSections: jest.Mock<void>;
+  fetchResources: jest.Mock<void>;
+  fetchResource: jest.Mock<void>;
+}

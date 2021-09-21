@@ -1,3 +1,4 @@
+import { ApiSections, ApiResource } from "@/entity";
 import { Store } from "vuex";
 import { ApiActionsMock } from "./actions";
 import { ApiMutationsMock } from "./mutations";
@@ -9,7 +10,11 @@ export interface ApiRootState {
   version: number;
 }
 
-export type ApiState = ApiRootState;
+export interface ApiState extends ApiRootState {
+  sections: ApiSections;
+  resources: ApiResource[];
+  resource: ApiResource;
+}
 
 export type ApiStore = Store<ApiState>;
 

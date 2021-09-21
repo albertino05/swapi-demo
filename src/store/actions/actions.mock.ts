@@ -16,4 +16,8 @@ export const mockActionsContext = (): ActionContext<
   rootGetters: {},
 });
 
-export const mockActions = (): ApiActionsMock => ({});
+export const mockActions = (): ApiActionsMock => ({
+  fetchSections: jest.fn(),
+  fetchResources: jest.fn(),
+  fetchResource: jest.fn(),
+});

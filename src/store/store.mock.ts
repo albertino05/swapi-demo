@@ -4,6 +4,7 @@ import { mockMutations } from "./mutations";
 import { mockGetters } from "./getters";
 import { mockStorage } from "./storage";
 import { mockProvider } from "@/service";
+import { mockResource, mockResources, mockSections } from "@/entity";
 
 export const mockRootState = (): ApiRootState => ({
   version: 0,
@@ -11,6 +12,9 @@ export const mockRootState = (): ApiRootState => ({
 
 export const mockState = (): ApiState => ({
   version: 0,
+  sections: mockSections(),
+  resources: mockResources(),
+  resource: mockResource(),
 });
 
 export const mockStore = (): ApiStoreMock => ({
