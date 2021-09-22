@@ -12,4 +12,7 @@ export const getters: ApiGetters = {
   getResource(state: ApiState): ApiResource {
     return { ...state.resource };
   },
+  getLoading(state: ApiState): boolean {
+    return state.loading;
+  },
 };

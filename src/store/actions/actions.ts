@@ -8,11 +8,17 @@ import {
 
 export const actions: ApiActions = {
   fetchSections(): void {
+    this.$storage.mutations.setLoading(true);
+
     this.$services.resource.sections().then((data: ApiSections) => {
       this.$storage.mutations.fetchSections(data);
+
+      this.$storage.mutations.setLoading(false);
     });
   },
   fetchResources(context: Context, payload: FetchResoucesActionPayload): void {
+    this.$storage.mutations.setLoading(true);
+
     this.$services.resource
       .resources(payload.type)
       .then((data: ApiPagedResource<ApiResource>) => {
@@ -22,13 +28,19 @@ export const actions: ApiActions = {
       })
       .then((data: ApiResource[]) => {
         this.$storage.mutations.fetchResources(data);
+
+        this.$storage.mutations.setLoading(false);
       });
   },
   fetchResource(context: Context, payload: FetchResouceActionPayload): void {
+    this.$storage.mutations.setLoading(true);
+
     this.$services.resource
       .resource(payload.type, payload.id)
       .then((data: ApiResource) => {
         this.$storage.mutations.fetchResource(data);
+
+        this.$storage.mutations.setLoading(false);
       });
   },
 };

@@ -17,6 +17,9 @@ export const makeStorage = (store: ApiStore): ApiStorage => ({
     getResource(): ApiResource {
       return store.getters.getResource;
     },
+    getLoading(): boolean {
+      return store.getters.getLoading;
+    },
   },
 
   actions: {
@@ -29,6 +32,9 @@ export const makeStorage = (store: ApiStore): ApiStorage => ({
     fetchResource(payload: FetchResouceActionPayload): void {
       store.dispatch("fetchResource", payload);
     },
+    setLoading(loading: boolean): void {
+      store.dispatch("setLoading", loading);
+    },
   },
 
   mutations: {
@@ -40,6 +46,9 @@ export const makeStorage = (store: ApiStore): ApiStorage => ({
     },
     fetchResource(payload: ApiResource): void {
       store.commit("fetchResource", payload);
+    },
+    setLoading(loading: boolean): void {
+      store.commit("setLoading", loading);
     },
   },
 });

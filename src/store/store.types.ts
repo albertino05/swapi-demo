@@ -14,6 +14,7 @@ export interface ApiState extends ApiRootState {
   sections: ApiSections;
   resources: ApiResource[];
   resource: ApiResource;
+  loading: boolean;
 }
 
 export type ApiStore = Store<ApiState>;
