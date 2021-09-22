@@ -5,4 +5,5 @@ export const mockGetters = (): ApiGettersMock => ({
   getResources: jest.fn(),
   getResource: jest.fn(),
   getLoading: jest.fn(),
+  getPagination: jest.fn(),
 });

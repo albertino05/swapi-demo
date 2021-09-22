@@ -20,7 +20,7 @@ export const actions: ApiActions = {
     this.$storage.mutations.setLoading(true);
 
     this.$services.resource
-      .resources(payload.type)
+      .resources(payload.type, payload.page)
       .then((data: ApiPagedResource<ApiResource>) => {
         const { count, previous, next, ...rest } = data;
 

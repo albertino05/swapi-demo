@@ -10,6 +10,7 @@ export interface ApiStorage {
     getResources(): ApiResource[];
     getResource(): ApiResource;
     getLoading(): boolean;
+    getPagination(): Pagination;
   };
 
   actions: {
@@ -33,6 +34,7 @@ export interface ApiStorageMock extends ApiStorage {
     getResources: jest.Mock<ApiResource[]>;
     getResource: jest.Mock<ApiResource>;
     getLoading: jest.Mock<boolean>;
+    getPagination: jest.Mock<Pagination>;
   };
 
   actions: {

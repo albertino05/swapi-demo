@@ -20,6 +20,9 @@ export const makeStorage = (store: ApiStore): ApiStorage => ({
     getLoading(): boolean {
       return store.getters.getLoading;
     },
+    getPagination(): Pagination {
+      return store.getters.getPagination;
+    },
   },
 
   actions: {
