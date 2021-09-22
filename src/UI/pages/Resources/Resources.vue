@@ -4,7 +4,8 @@
       :section="$storage.getters.getResources()"
       :type="$route.params.section"
     />
-    <router-link to="/">Home</router-link>
+    <!-- :pagination="$storage.getters.getPagination()" -->
+    <router-link to="/">Back Home</router-link>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 import { ApiStorage } from "./storage.types";
 import { ApiStore } from "../store.types";
-import { ApiSections, ApiResource } from "@/entity";
+import { ApiSections, ApiResource, Pagination } from "@/entity";
 import {
   FetchResouceActionPayload,
   FetchResoucesActionPayload,
@@ -32,9 +32,6 @@ export const makeStorage = (store: ApiStore): ApiStorage => ({
     fetchResource(payload: FetchResouceActionPayload): void {
       store.dispatch("fetchResource", payload);
     },
-    setLoading(loading: boolean): void {
-      store.dispatch("setLoading", loading);
-    },
   },
 
   mutations: {
@@ -49,6 +46,9 @@ export const makeStorage = (store: ApiStore): ApiStorage => ({
     },
     setLoading(loading: boolean): void {
       store.commit("setLoading", loading);
+    },
+    setPagination(payload: Pagination): void {
+      store.commit("setPagination", payload);
     },
   },
 });

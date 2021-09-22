@@ -15,6 +15,11 @@ export const makeStore = (): Store<ApiState> =>
       resources: [],
       resource: {},
       loading: false,
+      pagination: {
+        count: undefined,
+        previous: undefined,
+        next: undefined,
+      },
     },
     actions,
     mutations,

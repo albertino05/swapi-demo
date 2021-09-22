@@ -22,9 +22,11 @@ export const actions: ApiActions = {
     this.$services.resource
       .resources(payload.type)
       .then((data: ApiPagedResource<ApiResource>) => {
-        // @todo pagination"
+        const { count, previous, next, ...rest } = data;
 
-        return data.results;
+        this.$storage.mutations.setPagination({ count, previous, next });
+
+        return rest.results;
       })
       .then((data: ApiResource[]) => {
         this.$storage.mutations.fetchResources(data);

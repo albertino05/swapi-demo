@@ -16,6 +16,11 @@ export const mockState = (): ApiState => ({
   resources: mockResources(),
   resource: mockResource(),
   loading: false,
+  pagination: {
+    count: undefined,
+    previous: undefined,
+    next: undefined,
+  },
 });
 
 export const mockStore = (): ApiStoreMock => ({

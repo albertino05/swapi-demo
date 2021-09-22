@@ -50,9 +50,18 @@ describe(">>> Actions", () => {
         payload.type
       );
 
+      const { count, previous, next, ...rest } = resources;
+
+      expect(store.$storage.mutations.setPagination).toBeCalledWith({
+        count,
+        previous,
+        next,
+      });
+
       expect(store.$storage.mutations.fetchResources).toBeCalledWith(
-        resources.results
+        rest.results
       );
+
       expect(store.$storage.mutations.setLoading).toBeCalledWith(false);
       expect(store.$storage.mutations.setLoading).toBeCalledTimes(2);
     });

@@ -4,10 +4,13 @@ export interface ApiSections {
   [section: string]: string;
 }
 
-export interface ApiPagedResource<T> {
-  count: number;
+export interface Pagination {
+  count?: number;
   next?: string;
-  previous: string;
+  previous?: string;
+}
+
+export interface ApiPagedResource<T> extends Pagination {
   results: T[];
 }
 

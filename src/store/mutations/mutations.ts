@@ -1,5 +1,5 @@
 import { ApiMutations } from "./mutations.types";
-import { ApiSections, ApiResource } from "@/entity";
+import { ApiSections, ApiResource, Pagination } from "@/entity";
 import { ApiState } from "../store.types";
 
 export const mutations: ApiMutations = {
@@ -14,5 +14,8 @@ export const mutations: ApiMutations = {
   },
   setLoading(state: ApiState, payload: boolean): void {
     state.loading = payload;
+  },
+  setPagination(state: ApiState, payload: Pagination): void {
+    state.pagination = payload;
   },
 };
