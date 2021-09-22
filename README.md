@@ -1,5 +1,13 @@
-# starwars2
+# SWapi - Demo DDD | Clean Architecture | Tdd | Vue | Ts
 
+```
+    UI - store
+   -------------
+     services
+   -------------
+     entities
+
+```
 ## Project setup
 ```
 yarn install
@@ -15,12 +23,13 @@ yarn serve
 yarn build
 ```
 
-### Run your unit tests
+### Run unit tests
 ```
 yarn test:unit
 ```
 
-### Run your end-to-end tests
+### Run end-to-end tests 
+*(not implemented)*
 ```
 yarn test:e2e
 ```
@@ -30,5 +39,3 @@ yarn test:e2e
 yarn lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
