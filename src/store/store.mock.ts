@@ -15,6 +15,7 @@ export const mockState = (): ApiState => ({
   sections: mockSections(),
   resources: mockResources(),
   resource: mockResource(),
+  loading: false,
 });
 
 export const mockStore = (): ApiStoreMock => ({

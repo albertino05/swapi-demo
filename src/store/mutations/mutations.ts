@@ -12,4 +12,7 @@ export const mutations: ApiMutations = {
   fetchResource(state: ApiState, payload: ApiResource): void {
     state.resource = payload;
   },
+  setLoading(state: ApiState, payload: boolean): void {
+    state.loading = payload;
+  },
 };

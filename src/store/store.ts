@@ -14,6 +14,7 @@ export const makeStore = (): Store<ApiState> =>
       sections: {},
       resources: [],
       resource: {},
+      loading: false,
     },
     actions,
     mutations,
