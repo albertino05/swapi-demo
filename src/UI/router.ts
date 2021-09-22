@@ -1,14 +1,14 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import { Home } from "@/UI/pages";
+import { Sections, Resources, Resource } from "@/UI/pages";
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    name: "Sections",
+    component: Sections,
   },
   {
     path: "/about",
@@ -18,6 +18,16 @@ const routes: Array<RouteConfig> = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "./pages/About/About.vue"),
+  },
+  {
+    path: "/:section",
+    name: "Resources",
+    component: Resources,
+  },
+  {
+    path: "/:section/:id",
+    name: "Resource",
+    component: Resource,
   },
 ];
 
