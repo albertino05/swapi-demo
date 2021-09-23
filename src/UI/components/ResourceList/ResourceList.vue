@@ -1,10 +1,5 @@
 <template>
-  <div>
-    <h2 class="text-4xl font-semibold text-black text-center">
-      {{ type.toUpperCase() }}
-    </h2>
-    <Component :is="sectionItem" :section="section" />
-  </div>
+  <Component :is="sectionItem" :section="section" />
 </template>
 
 <script lang="ts">

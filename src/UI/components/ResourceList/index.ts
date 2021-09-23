@@ -1,3 +1,4 @@
 import ResourceList from "./ResourceList.vue";
 import Pagination from "./Pagination.vue";
-export { ResourceList, Pagination };
+import ResourceSearch from "./ResourceSearch.vue";
+export { ResourceList, Pagination, ResourceSearch };
