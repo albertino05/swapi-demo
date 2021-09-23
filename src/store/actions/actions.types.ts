@@ -23,12 +23,13 @@ export interface ApiActionsMock extends ApiActions {
   fetchResource: jest.Mock<void>;
 }
 
-export interface FetchResoucesActionPayload {
+export interface FetchResouceActionPayload {
   readonly type: string;
-  readonly page?: number;
+  readonly id: number;
 }
 
-export interface FetchResouceActionPayload
-  extends Omit<FetchResoucesActionPayload, "page"> {
-  readonly id: number;
+export interface FetchResoucesActionPayload
+  extends Omit<FetchResouceActionPayload, "id"> {
+  readonly page?: number;
+  readonly search?: string;
 }
