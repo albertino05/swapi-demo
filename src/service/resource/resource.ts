@@ -5,8 +5,12 @@ export class ApiClient implements ApiResourceService {
   async sections(): Promise<ApiSections> {
     return this.get();
   }
-  async resources(type: string, page = 1): Promise<ApiPagedResource<Resource>> {
-    return this.get(`${type}?page=${page}`);
+  async resources(
+    type: string,
+    page = 1,
+    search = ""
+  ): Promise<ApiPagedResource<Resource>> {
+    return this.get(`${type}?page=${page}&search=${search}`);
   }
   async resource(type: string, id: number): Promise<Resource> {
     return this.get(`${type}/${id}`);
