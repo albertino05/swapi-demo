@@ -8,60 +8,82 @@ import {
 } from "./actions.types";
 
 describe(">>> Actions", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   describe(">> fetchSections", () => {
     const store = mockStore();
     const context = mockActionsContext();
 
-    it("should fetch all sections and then commit sections mutation", async () => {
+    it("should set loading, fetch all sections then commit sections mutation and remove loading", async () => {
       const sections: ApiSections = {
         name: "val",
       };
 
       store.$services.resource.sections.mockResolvedValueOnce(sections);
 
-      actions.fetchSections.bind(store)(context);
-      expect(store.$services.resource.sections).toBeCalled();
+      await actions.fetchSections.bind(store)(context);
+      expect(store.$storage.mutations.setLoading).toBeCalledWith(true);
+      await expect(store.$services.resource.sections).toBeCalled();
 
-      //?
-      // expect(store.$storage.mutations.fetchSections).toBeCalledWith(sections);
+      expect(store.$storage.mutations.fetchSections).toBeCalledWith(sections);
+
+      expect(store.$storage.mutations.setLoading).toBeCalledWith(false);
+      expect(store.$storage.mutations.setLoading).toBeCalledTimes(2);
     });
 
-    it("should call service to fetch resources and then resources mutation", () => {
+    it("should set loading, call service to fetch resources then resources mutation and remove loading", async () => {
       const resources: ApiPagedResource<ApiResource> = {
         count: 0,
-        previous: "xxx",
-        next: undefined,
+        previous: undefined,
+        next: "1",
         results: [{}, {}],
       };
       store.$services.resource.resources.mockResolvedValueOnce(resources);
 
       const payload: FetchResoucesActionPayload = { type: "people" };
-      actions.fetchResources.bind(store)(context, payload);
+      await actions.fetchResources.bind(store)(context, payload);
 
-      expect(store.$services.resource.resources).toBeCalledWith(payload.type);
+      expect(store.$storage.mutations.setLoading).toBeCalledWith(true);
+      await expect(store.$services.resource.resources).toBeCalledWith(
+        payload.type,
+        undefined
+      );
 
-      // ?
-      // expect(store.$storage.mutations.fetchResources).toBeCalledWith({
-      //   resources,
-      // });
+      const { count, previous, next, ...rest } = resources;
+
+      expect(store.$storage.mutations.setPagination).toBeCalledWith({
+        count,
+        previous,
+        next,
+      });
+
+      expect(store.$storage.mutations.fetchResources).toBeCalledWith(
+        rest.results
+      );
+
+      expect(store.$storage.mutations.setLoading).toBeCalledWith(false);
+      expect(store.$storage.mutations.setLoading).toBeCalledTimes(2);
     });
 
-    it("should call service to fetch resource and then resource mutation", () => {
+    it("should set loading, call service to fetch resource then resource mutation and remove loading", async () => {
       const resource: ApiResource = {};
       store.$services.resource.resource.mockResolvedValueOnce(resource);
 
       const payload: FetchResouceActionPayload = { type: "people", id: 1 };
-      actions.fetchResource.bind(store)(context, payload);
+      await actions.fetchResource.bind(store)(context, payload);
+      expect(store.$storage.mutations.setLoading).toBeCalledWith(true);
 
       expect(store.$services.resource.resource).toBeCalledWith(
         payload.type,
         payload.id
       );
 
-      // ?
-      // expect(store.$storage.mutations.fetchResource).toBeCalledWith({
-      //   resource,
-      // });
+      expect(store.$storage.mutations.fetchResource).toBeCalledWith(resource);
+
+      expect(store.$storage.mutations.setLoading).toBeCalledWith(false);
+      expect(store.$storage.mutations.setLoading).toBeCalledTimes(2);
     });
   });
 });

@@ -1,4 +1,4 @@
-import { ApiSections, ApiResource } from "@/entity";
+import { ApiSections, ApiResource, Pagination } from "@/entity";
 import { ApiState } from "../store.types";
 import { ApiGetters } from "./getters.types";
 
@@ -11,5 +11,11 @@ export const getters: ApiGetters = {
   },
   getResource(state: ApiState): ApiResource {
     return { ...state.resource };
+  },
+  getLoading(state: ApiState): boolean {
+    return state.loading;
+  },
+  getPagination(state: ApiState): Pagination {
+    return state.pagination;
   },
 };
