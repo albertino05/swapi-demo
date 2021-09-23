@@ -42,14 +42,18 @@ describe(">>> Actions", () => {
       };
       store.$services.resource.resources.mockResolvedValueOnce(resources);
 
-      const payload: FetchResoucesActionPayload = { type: "people" };
+      const payload: FetchResoucesActionPayload = {
+        type: "people",
+        page: 3,
+        search: "test",
+      };
       await actions.fetchResources.bind(store)(context, payload);
 
       expect(store.$storage.mutations.setLoading).toBeCalledWith(true);
       await expect(store.$services.resource.resources).toBeCalledWith(
         payload.type,
-        undefined,
-        undefined
+        payload.page,
+        payload.search
       );
 
       const { count, previous, next, ...rest } = resources;
