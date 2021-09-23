@@ -5,8 +5,8 @@ export class ApiClient implements ApiResourceService {
   async sections(): Promise<ApiSections> {
     return this.get();
   }
-  async resources(type: string): Promise<ApiPagedResource<Resource>> {
-    return this.get(type);
+  async resources(type: string, page = 1): Promise<ApiPagedResource<Resource>> {
+    return this.get(`${type}?page=${page}`);
   }
   async resource(type: string, id: number): Promise<Resource> {
     return this.get(`${type}/${id}`);
@@ -27,11 +27,32 @@ export class ApiClient implements ApiResourceService {
         if (typeof data.url === "string") {
           this.addId(data);
         }
+        if (
+          typeof data.previous !== undefined &&
+          typeof data.next !== undefined
+        ) {
+          this.fixPagination(data);
+        }
         return data;
       });
   }
 
   private addId(el: { url: string; id: number }): void {
     el.id = Number(el.url.split("/").reverse()[1]);
+  }
+  private fixPagination(data: { previous?: string; next?: string }): void {
+    const { previous, next } = data;
+
+    if (previous) {
+      const page = previous.substring(previous.indexOf("?") + 1);
+      const params = new URLSearchParams(page);
+      data.previous = params.get("page") || "";
+    }
+
+    if (next) {
+      const page = next.substring(next.indexOf("?") + 1);
+      const params = new URLSearchParams(page);
+      data.next = params.get("page") || "";
+    }
   }
 }

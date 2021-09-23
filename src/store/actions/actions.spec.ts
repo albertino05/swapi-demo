@@ -36,8 +36,8 @@ describe(">>> Actions", () => {
     it("should set loading, call service to fetch resources then resources mutation and remove loading", async () => {
       const resources: ApiPagedResource<ApiResource> = {
         count: 0,
-        previous: "xxx",
-        next: undefined,
+        previous: undefined,
+        next: "1",
         results: [{}, {}],
       };
       store.$services.resource.resources.mockResolvedValueOnce(resources);
@@ -47,12 +47,22 @@ describe(">>> Actions", () => {
 
       expect(store.$storage.mutations.setLoading).toBeCalledWith(true);
       await expect(store.$services.resource.resources).toBeCalledWith(
-        payload.type
+        payload.type,
+        undefined
       );
 
+      const { count, previous, next, ...rest } = resources;
+
+      expect(store.$storage.mutations.setPagination).toBeCalledWith({
+        count,
+        previous,
+        next,
+      });
+
       expect(store.$storage.mutations.fetchResources).toBeCalledWith(
-        resources.results
+        rest.results
       );
+
       expect(store.$storage.mutations.setLoading).toBeCalledWith(false);
       expect(store.$storage.mutations.setLoading).toBeCalledTimes(2);
     });

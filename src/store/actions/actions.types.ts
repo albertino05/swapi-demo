@@ -25,8 +25,10 @@ export interface ApiActionsMock extends ApiActions {
 
 export interface FetchResoucesActionPayload {
   readonly type: string;
+  readonly page?: number;
 }
 
-export interface FetchResouceActionPayload extends FetchResoucesActionPayload {
+export interface FetchResouceActionPayload
+  extends Omit<FetchResoucesActionPayload, "page"> {
   readonly id: number;
 }

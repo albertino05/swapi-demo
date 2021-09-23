@@ -5,4 +5,5 @@ export const mockMutations = (): ApiMutationsMock => ({
   fetchResources: jest.fn(),
   fetchResource: jest.fn(),
   setLoading: jest.fn(),
+  setPagination: jest.fn(),
 });

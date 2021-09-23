@@ -6,17 +6,18 @@ export const mockStorage = (): ApiStorageMock => ({
     getResources: jest.fn(),
     getResource: jest.fn(),
     getLoading: jest.fn(),
+    getPagination: jest.fn(),
   },
   actions: {
     fetchSections: jest.fn(),
     fetchResources: jest.fn(),
     fetchResource: jest.fn(),
-    setLoading: jest.fn(),
   },
   mutations: {
     fetchSections: jest.fn(),
     fetchResources: jest.fn(),
     fetchResource: jest.fn(),
     setLoading: jest.fn(),
+    setPagination: jest.fn(),
   },
 });

@@ -1,4 +1,4 @@
-import { ApiSections, ApiResource } from "@/entity";
+import { ApiSections, ApiResource, Pagination } from "@/entity";
 import {
   FetchResouceActionPayload,
   FetchResoucesActionPayload,
@@ -10,13 +10,13 @@ export interface ApiStorage {
     getResources(): ApiResource[];
     getResource(): ApiResource;
     getLoading(): boolean;
+    getPagination(): Pagination;
   };
 
   actions: {
     fetchSections(): void;
     fetchResources(payload: FetchResoucesActionPayload): void;
     fetchResource(payload: FetchResouceActionPayload): void;
-    setLoading(loading: boolean): void;
   };
 
   mutations: {
@@ -24,6 +24,7 @@ export interface ApiStorage {
     fetchResources(payload: ApiResource[]): void;
     fetchResource(payload: ApiResource): void;
     setLoading(loading: boolean): void;
+    setPagination(payload: Pagination): void;
   };
 }
 
@@ -33,13 +34,13 @@ export interface ApiStorageMock extends ApiStorage {
     getResources: jest.Mock<ApiResource[]>;
     getResource: jest.Mock<ApiResource>;
     getLoading: jest.Mock<boolean>;
+    getPagination: jest.Mock<Pagination>;
   };
 
   actions: {
     fetchSections: jest.Mock<void>;
     fetchResources: jest.Mock<void>;
     fetchResource: jest.Mock<void>;
-    setLoading: jest.Mock<void>;
   };
 
   mutations: {
@@ -47,5 +48,6 @@ export interface ApiStorageMock extends ApiStorage {
     fetchResources: jest.Mock<void>;
     fetchResource: jest.Mock<void>;
     setLoading: jest.Mock<void>;
+    setPagination: jest.Mock<void>;
   };
 }
